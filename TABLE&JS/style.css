@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}  
+table{ 
+  position: relative;
+  top: 80px;
+  left: 20px;
+  border: 2px solid black;
+  height: 80%;
+  width: 80%;
+}
+.box{
+  background-color: bisque;
+  height: 80px;
+  width: 60px;
+  /* object-fit: cover; */
+}
+ 
