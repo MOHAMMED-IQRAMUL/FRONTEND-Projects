@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+    <div class="w-full h-100vh py-[50px] pl-[50px]  bg-gray-100 text-center font-bold text-sm ">
+
+        <div class="flex bg-white rounded-full shadow-md items-center p-1 gap-1 w-[400px] justify-between">
+
+            <div
+                class="w-[50%] h-[40px] rounded-full border flex justify-between items-center hover:bg-black hover:text-white cursor-pointer transition duration-500 ease-in-out Fr1">
+
+                <div class="w-full">Free</div>
+
+
+            </div>
+
+            <div
+                class="flex w-[50%] h-[40px] p-1 gap-1  items-center justify-center rounded-full border hover:bg-black hover:text-white cursor-pointer transition duration-500 ease-in-out">
+
+                <div
+                    class="border rounded-full w-full h-full hover:bg-white hover:text-black cursor-pointer transition duration-500 ease-in-out grid place-items-center Fr2">
+                    Monthly</div>
+
+                <div
+                    class="border rounded-full w-full h-full hover:bg-white hover:text-black cursor-pointer transition duration-500 ease-in-out grid place-items-center Fr3">
+                    Yearly</div>
+
+            </div>
+
+        </div>
+
+        <div class="mt-[10px] hidden flex bg-white rounded-lg shadow-md items-center p-1 w-[400px] justify-between parent ">
+
+
+            <div class="border hidden w-full h-[400px] rounded-lg border grid place-items-center  Id1 ">Free tier
+                content</div>
+
+
+            <div class="border hidden w-full h-[400px] rounded-lg border grid place-items-center Id2">Monthly tier content
+            </div>
+            <div class="border hidden w-full h-[400px] rounded-lg grid place-items-center Id3">Yearly tier content
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+    <script>
+        document.querySelector('.Fr1').addEventListener('mouseover', () => {
+            document.querySelector('.parent').classList.remove('hidden');
+            document.querySelector('.Id1').classList.remove('hidden');
+        });
+
+        document.querySelector('.Fr2').addEventListener('mouseover', () => {
+            document.querySelector('.parent').classList.remove('hidden');
+            document.querySelector('.Id2').classList.remove('hidden');
+        });
+
+        document.querySelector('.Fr3').addEventListener('mouseover', () => {
+            document.querySelector('.parent').classList.remove('hidden');
+            document.querySelector('.Id3').classList.remove('hidden');
+        });
+
+
+        document.querySelector('.Fr1').addEventListener('mouseleave', () => {
+            document.querySelector('.parent').classList.add('hidden');
+            document.querySelector('.Id1').classList.add('hidden');
+        });
+
+        document.querySelector('.Fr2').addEventListener('mouseleave', () => {
+            document.querySelector('.parent').classList.add('hidden');
+            document.querySelector('.Id2').classList.add('hidden');
+        });
+
+        document.querySelector('.Fr3').addEventListener('mouseleave', () => {
+            document.querySelector('.parent').classList.add('hidden');
+            document.querySelector('.Id3').classList.add('hidden');
+        });
+    </script>
+
+</body>
+
+</html>
