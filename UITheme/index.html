@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Palette Selector</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-200 text-black min-h-screen flex flex-col items-center justify-start p-6">
+
+  <div class="w-full max-w-xl bg-white p-6 rounded-lg shadow-md">
+    <h1 class="text-2xl font-bold text-center mb-6">My Palette Selector</h1>
+
+    <div id="palette-container" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <!-- Palettes will be injected here -->
+    </div>
+  </div>
+
+  <div id="content-box" class="mt-10 w-full max-w-xl bg-white p-6 rounded-lg shadow-md text-center transition-all duration-500">
+    <h2 class="text-xl font-semibold mb-4">This is sample content</h2>
+    <p class="mb-2">Click a palette to change my style!</p>
+    <button class="mt-4 px-4 py-2 rounded font-semibold shadow" id="action-btn">Sample Button</button>
+  </div>
+
+  <script>
+    const palettes = [
+      {
+        palette_name: "Palette 1",
+        colors: ["#000223", "#FFA000", "#7C521B", "#FFFAFE"]
+      },
+      {
+        palette_name: "Palette 2",
+        colors: ["#00412E", "#96BF8A", "#E8EAE5", "#FFFFFF"]
+      },
+      {
+        palette_name: "Palette 3",
+        colors: ["#E7E8C4", "#FF3500", "#3F3826", "#000000"]
+      },
+      {
+        palette_name: "Palette 4",
+        colors: ["#FCFAEF", "#053A52", "#D8E267", "#BDF806"]
+      }
+    ];
+
+    const paletteContainer = document.getElementById("palette-container");
+    const contentBox = document.getElementById("content-box");
+    const actionBtn = document.getElementById("action-btn");
+
+    palettes.forEach((palette, index) => {
+      const wrapper = document.createElement("div");
+      wrapper.className = "bg-gray-100 p-4 rounded shadow text-center";
+
+      const title = document.createElement("h3");
+      title.className = "font-bold mb-2";
+      title.innerText = palette.palette_name;
+
+      const colorGroup = document.createElement("div");
+      colorGroup.className = "flex justify-center gap-2 mb-4";
+      palette.colors.forEach(color => {
+        const colorDiv = document.createElement("div");
+        colorDiv.className = "w-6 h-6 rounded";
+        colorDiv.style.backgroundColor = color;
+        colorGroup.appendChild(colorDiv);
+      });
+
+      const btn = document.createElement("button");
+      btn.className = "mt-2 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-300";
+      btn.innerText = "Apply Palette";
+
+      btn.addEventListener("click", () => {
+        contentBox.style.backgroundColor = palette.colors[0];
+        contentBox.style.color = palette.colors[1];
+        contentBox.style.border = `2px solid ${palette.colors[2]}`;
+        actionBtn.style.backgroundColor = palette.colors[3];
+        actionBtn.style.color = palette.colors[0];
+      });
+
+      wrapper.appendChild(title);
+      wrapper.appendChild(colorGroup);
+      wrapper.appendChild(btn);
+      paletteContainer.appendChild(wrapper);
+    });
+  </script>
+
+</body>
+</html>
