@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Data Structure</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .tree {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .node {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 10px;
+            border: 2px solid #4CAF50;
+            border-radius: 50%;
+            background-color: #e8f5e9;
+            font-weight: bold;
+        }
+        .line {
+            width: 2px;
+            height: 30px;
+            background-color: #4CAF50;
+            margin: 0 auto;
+        }
+        .children {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tree Data Structure Visualization</h1>
+    <div id="tree-container" class="tree"></div>
+
+    <script>
+        const treeData = {
+            value: "A",
+            children: [
+                {
+                    value: "B",
+                    children: [
+                        { value: "D", children: [] },
+                        { value: "E", children: [] }
+                    ]
+                },
+                {
+                    value: "C",
+                    children: [
+                        { value: "F", children: [] },
+                        { value: "G", children: [] }
+                    ]
+                }
+            ]
+        };
+
+        function createTreeNode(node) {
+            const nodeElement = document.createElement("div");
+            nodeElement.classList.add("node");
+            nodeElement.textContent = node.value;
+
+            const container = document.createElement("div");
+            container.appendChild(nodeElement);
+
+            if (node.children && node.children.length > 0) {
+                const line = document.createElement("div");
+                line.classList.add("line");
+                container.appendChild(line);
+
+                const childrenContainer = document.createElement("div");
+                childrenContainer.classList.add("children");
+
+                node.children.forEach(child => {
+                    childrenContainer.appendChild(createTreeNode(child));
+                });
+
+                container.appendChild(childrenContainer);
+            }
+
+            return container;
+        }
+
+        const treeContainer = document.getElementById("tree-container");
+        treeContainer.appendChild(createTreeNode(treeData));
+    </script>
+</body>
+</html>
