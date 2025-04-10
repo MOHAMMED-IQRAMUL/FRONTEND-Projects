@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pointer-events Explorer</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #2c2c3f);
+      color: #fff;
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-align: center;
+      color: #00e0ff;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin: 40px 0 20px;
+      color: #ffef9f;
+    }
+
+    .box {
+      width: 250px;
+      height: 60px;
+      margin: 20px auto;
+      line-height: 60px;
+      text-align: center;
+      border-radius: 12px;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .box:hover {
+      transform: scale(1.05);
+    }
+
+    .clickable {
+      background: #00c86f;
+    }
+
+    .unclickable {
+      background: #ff4f4f;
+    }
+
+    .info-box {
+      position: absolute;
+      top: -70px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 10px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      font-size: 0.85rem;
+      z-index: 10;
+    }
+
+    .box:hover .info-box {
+      opacity: 1;
+    }
+
+    svg {
+      width: 250px;
+      height: 100px;
+      margin: 30px auto;
+      display: block;
+      border-radius: 10px;
+      background: #212133;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
+    text {
+      pointer-events: none;
+      fill: white;
+      font-size: 0.8rem;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔍 CSS <code>pointer-events</code> Explorer</h1>
+
+  <div class="wrapper">
+    <h2>HTML Elements</h2>
+
+    <div class="box clickable" style="pointer-events: auto;" onclick="alert('auto clicked')">
+      Auto
+      <div class="info-box">Responds to pointer events as normal (default)</div>
+    </div>
+
+    <div class="box unclickable" style="pointer-events: none;" onclick="alert('none clicked')">
+      None
+      <div class="info-box">Element will not respond to any pointer events</div>
+    </div>
+
+    <h2>SVG Elements</h2>
+
+    <svg onclick="alert('visiblePainted clicked')">
+      <rect width="250" height="100" fill="blue" stroke="white" stroke-width="4" pointer-events="visiblePainted"/>
+      <text x="10" y="20">visiblePainted</text>
+      <title>Only painted (filled/stroked) visible parts respond</title>
+    </svg>
+
+    <svg onclick="alert('visibleFill clicked')">
+      <rect width="250" height="100" fill="blue" stroke="white" stroke-width="4" pointer-events="visibleFill"/>
+      <text x="10" y="20">visibleFill</text>
+      <title>Only visible fill area responds</title>
+    </svg>
+
+    <svg onclick="alert('visibleStroke clicked')">
+      <rect width="250" height="100" fill="none" stroke="white" stroke-width="10" pointer-events="visibleStroke"/>
+      <text x="10" y="20">visibleStroke</text>
+      <title>Only visible stroke area responds</title>
+    </svg>
+
+    <svg onclick="alert('visible clicked')">
+      <rect width="250" height="100" fill="blue" stroke="white" stroke-width="4" pointer-events="visible"/>
+      <text x="10" y="20">visible</text>
+      <title>All visible parts respond to events</title>
+    </svg>
+
+    <svg onclick="alert('painted clicked')">
+      <rect width="250" height="100" fill="blue" stroke="white" stroke-width="4" pointer-events="painted"/>
+      <text x="10" y="20">painted</text>
+      <title>Painted areas respond, even if invisible</title>
+    </svg>
+
+    <svg onclick="alert('all clicked')">
+      <rect width="250" height="100" fill="transparent" stroke="white" stroke-width="4" pointer-events="all"/>
+      <text x="10" y="20">all</text>
+      <title>Everything responds, even transparent parts</title>
+    </svg>
+
+    <div style="pointer-events: auto;">
+      <svg onclick="alert('inherit clicked')">
+        <rect width="250" height="100" fill="green" stroke="white" stroke-width="4" pointer-events="inherit"/>
+        <text x="10" y="20">inherit</text>
+        <title>Inherits pointer-events behavior from parent</title>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>
