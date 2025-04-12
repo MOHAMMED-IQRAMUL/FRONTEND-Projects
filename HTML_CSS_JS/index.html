@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML/CSS/JS Feature Lab</title>
+  <style>
+    :root {
+      --primary: #1e90ff;
+      --bg: #f9f9f9;
+      --card-bg: rgba(255, 255, 255, 0.15);
+      --card-border: rgba(255, 255, 255, 0.3);
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: #333;
+      padding: 2rem;
+    }
+
+    section {
+      margin-bottom: 5rem;
+      padding: 2rem;
+      border-radius: 1rem;
+      background: white;
+      box-shadow: 0 5px 15px var(--shadow);
+      transition: 0.3s;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    /* Section 1: Display Playground */
+    .display-container div {
+      padding: 1rem;
+      background: var(--primary);
+      color: white;
+      margin: 5px;
+    }
+
+    .layout-controls button {
+      margin: 5px;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      background: var(--primary);
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .layout-controls button:hover::after {
+      content: attr(data-tip);
+      position: absolute;
+      background: #000;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      transform: translateY(-150%);
+    }
+
+    /* Section 2: Glassmorphism Profile Card */
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      color: #000000;
+      background-image: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(0,0,0,0.1));
+      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
+    }
+
+    /* Section 3: Theme Switcher */
+    .theme-toggle {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Section 4: Loading Animation */
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Section 5: Custom Tooltips */
+    .tooltip-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+    .tooltip-wrapper:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: black;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.75rem;
+    }
+
+    /* Section 6: CSS Filter Lab */
+    .filter-preview {
+      filter: var(--currentFilter, none);
+      transition: 0.3s;
+      width: 200px;
+      border-radius: 10px;
+    }
+
+    /* Section 7: 3D Card Flip */
+    .card-flip {
+      perspective: 1000px;
+    }
+    .flip-inner {
+      width: 200px;
+      height: 150px;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    .card-flip:hover .flip-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-front, .flip-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .flip-front {
+      background: var(--primary);
+      color: white;
+    }
+    .flip-back {
+      background: #eee;
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <h2>1. CSS Display Playground</h2>
+    <div class="layout-controls">
+      <button onclick="setDisplay('flex')" data-tip="Display: Flex">Flex</button>
+      <button onclick="setDisplay('grid')" data-tip="Display: Grid">Grid</button>
+      <button onclick="setDisplay('block')" data-tip="Display: Block">Block</button>
+      <button onclick="setDisplay('inline-block')" data-tip="Inline-Block">Inline Block</button>
+    </div>
+    <div class="display-container" id="displayBox" style="display: flex">
+      <div>Box 1</div>
+      <div>Box 2</div>
+      <div>Box 3</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. Glassmorphism Profile Card</h2>
+    <div class="glass-card">
+      <h3>Jane Doe</h3> 
+      <p>Frontend Developer</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. Theme Switcher</h2>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+  </section>
+
+  <section>
+    <h2>4. Animated Loading Spinner</h2>
+    <div class="loader"></div>
+  </section>
+
+  <section>
+    <h2>5. Custom Tooltip</h2>
+    <div class="tooltip-wrapper" data-tooltip="I'm a tooltip! Hover me.">
+      <button class="theme-toggle">Hover Me</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>6. Interactive CSS Filter Lab</h2>
+    <label for="blurRange">-</label>
+    <input type="range" min="0" max="100" id="blurRange" /> Blur
+    <br /><br />
+    <img src="../GRID/landcruiser.png" class="filter-preview" id="filterImg" alt=""/>
+  </section>
+
+  <section>
+    <h2>7. 3D CSS Card Flip</h2>
+    <div class="card-flip">
+      <div class="flip-inner">
+        <div class="flip-front">Front</div>
+        <div class="flip-back">Back</div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function setDisplay(type) {
+      document.getElementById("displayBox").style.display = type;
+    }
+
+    function toggleTheme() {
+      const current = getComputedStyle(document.documentElement).getPropertyValue('--bg');
+      if (current.includes('f9f9f9')) {
+        document.documentElement.style.setProperty('--bg', '#1e1e1e');
+        document.documentElement.style.setProperty('--primary', '#ff6f61');
+      } else {
+        document.documentElement.style.setProperty('--bg', '#f9f9f9');
+        document.documentElement.style.setProperty('--primary', '#1e90ff');
+      }
+    }
+
+    document.getElementById("blurRange").addEventListener("input", function(e) {
+      const val = e.target.value;
+      document.documentElement.style.setProperty('--currentFilter', `blur(${val / 10}px)`);
+    });
+  </script>
+</body>
+</html>
