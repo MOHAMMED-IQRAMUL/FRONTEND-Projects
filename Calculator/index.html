@@ -40,6 +40,7 @@
         <option value="subtract">Subtract</option>
         <option value="multiply">Multiply</option>
         <option value="divide">Divide</option>
+        <option value="remainder">remainder</option>
     </select>
 
     <input type="number" id="num2" placeholder="Enter second number">
@@ -79,6 +80,9 @@
                         alert("Cannot divide by zero");
                         return;
                     }
+                    break;
+                case 'remainder':
+                    result = num1%num2;
                     break;
                 default:
                     alert("Invalid operation");
